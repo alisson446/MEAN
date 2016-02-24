@@ -1,0 +1,33 @@
+extends layout
+
+block content
+	div(ng-controller='ClienteController')
+		table
+			tr
+				th nome
+				th idade 
+			tr(ng-repeat='client in clientes')
+				td {{client.nome}}
+				td {{client.idade}}
+				td 
+					a(href='', ng-click="show('editar', client._id)") editar
+				td
+					a(href='', ng-click="deletar(client._id)") deletar
+		br
+
+		a(href='', ng-click="show('novo')") novo cliente
+
+		form(method='post', ng-show='modal')
+			h3 {{tituloModal}} de cliente
+
+			label(for='nome') nome:
+			input(type='text', ng-model='cliente.nome')
+			br
+
+			label(for='idade') idade:
+			input(type='text', ng-model='cliente.idade')
+			br
+
+			button(ng-show="tituloModal=='Cadastro'", ng-click='salvar(cliente)') cadastrar
+			button(ng-show="tituloModal=='Edição'", ng-click='editar(cliente)') editar
+			button(ng-click='modal=false') cancelar
