@@ -4,10 +4,10 @@ var mongoose = require('mongoose');
 
 /* GET home page. */
 router.get('', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+	res.render('index', { title: 'mean' });
 });
 
-var db = mongoose.connect('mongodb://localhost/mean');
+var db = mongoose.createConnection('mongodb://localhost/mean');
 var Schema = mongoose.Schema;
 
 var clienteSchema = new Schema({
@@ -15,7 +15,7 @@ var clienteSchema = new Schema({
 	idade: {type: String, required: true}
 });
 
-var Cliente = db.model('Cliente', clienteSchema, 'collection');
+var Cliente = db.model('Cliente', clienteSchema, 'clienteCollection');
 
 router.todos = function(req, res) {
 	Cliente.find({}, function(error, clientes) {

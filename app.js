@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var login = require('./routes/login');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -22,6 +23,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('', login);
+app.use('/login', login.login);
+app.use('/cadastro', login.cadastro);
+app.use('/**', login.autenticacao);
 app.use('/mean', routes);
 app.use('/users', users);
 app.get('/todos', routes.todos);
