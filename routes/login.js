@@ -1,6 +1,4 @@
 var express = require('express');
-var expressJwt = require('express-jwt');
-var jwt = require('jsonwebtoken');
 var router = express.Router();
 var mongoose = require('mongoose');
 
@@ -26,10 +24,7 @@ router.login = function(req, res) {
 		if(login.length==0) {
 			res.send(500);
 		}else {
-			var user = {usuario: login.usuario, senha: login.senha};
-
-			var token = jwt.sign(user, 'shhhhhhared-secret', { expiresInMinutes: 3600 });
-  			res.json({ token: token });
+			res.send(201);
 		}
 	});
 };
@@ -46,15 +41,16 @@ router.cadastro = function(req, res) {
 	});
 };
 
-router.autenticacao = function(req, res) {
-	var auth = req.headers['Authorization'];
+router.autenticacao = function(req, res, next) {
+	var auth = req.headers['authorization'];
+	var token = sessionStorage.token;
 	debugger;
 
-	if(auth) {
+	if(token) {
 		var b64 = new Buffer(auth.substring(6), 'base64');
-		var objeto = JSON.parse(b64.toString());
+     	var objeto = Object(b64.toString());   
 
-		res.json(objeto);
+		next();
 	}else {
 		res.send(401);
 	}

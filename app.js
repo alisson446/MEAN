@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var jwt = require('jsonwebtoken');
+
 var login = require('./routes/login');
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -27,7 +29,7 @@ app.use('', login);
 app.use('/login', login.login);
 app.use('/cadastro', login.cadastro);
 app.use('/**', login.autenticacao);
-app.use('/mean', routes);
+app.get('/mean', routes);
 app.use('/users', users);
 app.get('/todos', routes.todos);
 app.post('/salvar', routes.salvarCliente);
@@ -65,6 +67,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
