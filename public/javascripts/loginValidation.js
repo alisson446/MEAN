@@ -1,7 +1,7 @@
 angular.module('mean').controller('loginController', function ($scope, $http, $window, $location) {
 	$scope.logar = function(login) {
 		$http.post('/login', login).success(function() {
-			$http.get('/mean');
+			window.location.href = '/mean';
 		});
 	};
 
