@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 
 /* GET home page. */
-router.get('', function(req, res, next) {
+router.get('/mean', function(req, res, next) {
 	res.render('index', { title: 'mean' });
 });
 
