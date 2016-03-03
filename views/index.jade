@@ -2,6 +2,8 @@ extends layout
 
 block content
 	div(ng-controller='ClienteController')
+		h4 Olá {{usuario}}
+
 		table
 			tr
 				th nome
@@ -16,6 +18,8 @@ block content
 		br
 
 		a(href='', ng-click="show('novo')") novo cliente
+		br
+		a(href='', ng-click='logout()') deslogar
 
 		form(method='post', ng-show='modal')
 			h3 {{tituloModal}} de cliente

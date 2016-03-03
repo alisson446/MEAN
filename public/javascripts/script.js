@@ -2,6 +2,10 @@ angular.module('mean', []);
 
 angular.module('mean').controller('ClienteController', function($scope, $http) {
 
+	$http.get('/usuariosessao').success(function(data) {
+		$scope.usuario = data;
+	});
+
 	$http.get('/todos').success(function(retorno) {
 		$scope.clientes = retorno.clientes;
 	});
@@ -55,5 +59,10 @@ angular.module('mean').controller('ClienteController', function($scope, $http) {
 			}
 			$scope.modal = false;
 		});
+	};
+
+	$scope.logout = function() {
+		$http.get('/logout');
+		window.location.href = '/';
 	};
 });

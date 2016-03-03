@@ -1,4 +1,4 @@
-angular.module('mean').controller('loginController', function ($scope, $http, $window, $location) {
+angular.module('mean').controller('loginController', function ($scope, $http) {
 	$scope.logar = function(login) {
 		$http.post('/login', login).success(function() {
 			window.location.href = '/mean';
@@ -10,4 +10,8 @@ angular.module('mean').controller('loginController', function ($scope, $http, $w
 			$scope.formLogin = true;
 		});
 	};
+
+	$scope.logout = function() {
+		$http.get('/logout');
+	};	
 });	

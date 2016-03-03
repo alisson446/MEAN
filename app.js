@@ -31,11 +31,13 @@ app.use('/cadastro', login.cadastro);
 app.use('/**', login.autenticacao);
 app.get('/mean', routes);
 app.use('/users', users);
+app.use('/usuariosessao', login.obterUsuarioSessao);
 app.get('/todos', routes.todos);
 app.post('/salvar', routes.salvarCliente);
 app.post('/exibir', routes.exibir);
 app.post('/editar', routes.editar);
 app.post('/deletar', routes.deletar);
+app.get('/logout', login.logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
