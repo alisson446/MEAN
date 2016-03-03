@@ -51,7 +51,10 @@ router.exibir = function(req, res) {
 };
 
 router.editar = function(req, res) {
-	Cliente.findOneAndUpdate({_id: req.body._id}, req.body, function(error, cliente) {
+	var id = req.body._id;
+	delete req.body._id;
+	
+	Cliente.findOneAndUpdate({_id: id}, req.body, function(error, cliente) {
 		if(error) {
 			res.send(500);
  		}else {
